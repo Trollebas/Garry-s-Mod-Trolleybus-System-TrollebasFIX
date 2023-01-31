@@ -2582,6 +2582,7 @@ Trolleybus_System.ContactNetwork.Types = {
 			GetAngles = function(self,data) return data.Ang end,
 		},
 		["pillar_lamp"] = {
+		
 			Name = L"contactnetwork.types.suspensionandother.pillar_lamp",
 			ldata = {Vector(0,0,30),Vector(0,-105,84),Angle(90,-90,0),Color(255,225,125),1500,3,40,100},
 			lmat = Material("sprites/light_ignorez"),
@@ -2656,6 +2657,122 @@ Trolleybus_System.ContactNetwork.Types = {
 				hook.Add("PostDrawTranslucentRenderables",ent,function(ent,depth,skybox,sky3d)
 					if sky3d and skybox then return end
 					if !Trolleybus_System.NetworkSystem.GetHelperVar("ContactNetwork.PillarLampLighting","Active") then return end
+
+					local p,a = LocalToWorld(self.ldata[2],self.ldata[3],data.Pos,data.Ang)
+					local fr = ent.pixvis:PixelVisible(p,1)
+
+					if fr>0 then
+						render.SetMaterial(self.lmat)
+						render.DrawSprite(p,self.ldata[8]*fr,self.ldata[8]*fr,ColorAlpha(self.ldata[4],fr*255))
+					end
+				end)
+
+				return ent
+			end,
+			UpdateModel = function(self,data,ent)
+				ent:SetPos(data.Pos)
+				ent:SetAngles(data.Ang)
+			end,
+			ShouldBeVisible = function(self,data,eyepos,maxdist)
+				return data.Pos:DistToSqr(eyepos)<maxdist*maxdist
+			end,
+			GetPosition = function(self,data) return data.Pos end,
+			GetAngles = function(self,data) return data.Ang end,
+		},
+		["pillar_lamp_on"] = {
+		
+			Name = L"contactnetwork.types.suspensionandother.pillar_lamp_1",
+			ldata = {Vector(0,0,30),Vector(0,-105,84),Angle(180,-90,0),Color(224,176,255),1500,3,40,100},
+			lmat = Material("sprites/light_ignorez"),
+			ConnectablePositions = {
+				{
+					Move = function(self,data,pos) data.Pos,data.Ang = ChangeMainPosByChangingLocalPosLocal(data.Pos,data.Ang,self.ldata[1],angle_zero,pos) end,
+					GetPosition = function(self,data) return LocalToWorld(self.ldata[1],angle_zero,data.Pos,data.Ang) end,
+					Rotate = function(self,data,ang) data.Pos,data.Ang = ChangeMainPosByChangingLocalPosLocal(data.Pos,data.Ang,self.ldata[1],angle_zero,nil,ang) end,
+					GetAngles = function(self,data) return data.Ang end,
+					ConnectingFilter = {["pillar"] = {12}},
+				},
+			},
+			Properties = {},
+			Initialize = function(self,data,pos,ang)
+				data.Pos = pos
+				data.Ang = ang
+
+				if SERVER and !Trolleybus_System.ContactNetwork._PillarsLampLightingHook_1 then
+					Trolleybus_System.ContactNetwork._PillarsLampLightingHook_1 = true
+
+					local timed = 0
+
+					hook.Add("Think","Trolleybus_System.ContactNetwork.PillarLampLighting_1",function()
+						if CurTime()+timed>0 then
+							timed = CurTime()
+
+							local emit1 = Trolleybus_System.RunEvent("ContactNetwork_LampsEmitLight_1")
+							Trolleybus_System.NetworkSystem.SetHelperVar("ContactNetwork.PillarLampLighting_1","Active",emit1 and true or false)
+						end
+					end)
+
+					function Trolleybus_System:TrolleybusSystem_ContactNetwork_LampsEmitLight_1()
+						if AtmosGlobal and (AtmosGlobal:GetTime()>=0 or AtmosGlobal:GetTime()<=0) then
+							return true
+						end
+
+						return false
+					end
+				end
+			end,
+			NetworkInitialize = function(self,data)
+				if SERVER then
+					data.NW.SetVar("dlightID",math.random(1000,8000))
+				end
+			end,
+			SetupModel = function(self,data)
+				local ent = ClientsideModel("models/trolleybus/contactnetwork/pillar_lamp.mdl",RENDERGROUP_BOTH)
+				ent.pixvis = Trolleybus_System.CreatePixVisUHandle()
+
+				hook.Add("Think",ent,function(ent)
+					local id = data.NW and data.NW.GetVar("dlightID")
+
+					if id and Trolleybus_System.NetworkSystem.GetHelperVar("ContactNetwork.PillarLampLighting_1","Active") then
+						local light = DynamicLight(id)
+
+						if light then
+							local pos,ang = LocalToWorld(self.ldata[2],self.ldata[3],data.Pos,data.Ang)
+
+							light.pos = pos
+							light.dir = ang:Forward()
+							light.dietime = CurTime()+1
+							light.decay = 1000
+							light.r = self.ldata[4].r
+							light.g = self.ldata[4].g
+							light.b = self.ldata[4].b
+							light.size = self.ldata[5]
+							light.brightness = self.ldata[6]
+							light.outerangle = self.ldata[7]
+						end
+					end
+					if id and Trolleybus_System.NetworkSystem.GetHelperVar("ContactNetwork.PillarLampLighting","Active") then
+                        local light = DynamicLight(id)
+
+                        if light then
+                            local pos,ang = LocalToWorld(self.ldata[2],self.ldata[3],data.Pos,data.Ang)
+
+                            light.pos = pos
+                            light.dir = ang:Forward()
+                            light.dietime = CurTime()+1
+                            light.decay = 1000
+                            light.r = self.ldata[4].r
+                            light.g = self.ldata[4].g
+                            light.b = self.ldata[4].b
+                            light.size = self.ldata[5]
+                            light.brightness = self.ldata[6]
+                            light.outerangle = self.ldata[7]
+                        end
+                    end
+				end)
+				hook.Add("PostDrawTranslucentRenderables",ent,function(ent,depth,skybox,sky3d)
+					if sky3d and skybox then return end
+					if !Trolleybus_System.NetworkSystem.GetHelperVar("ContactNetwork.PillarLampLighting_1","Active") then return end
 
 					local p,a = LocalToWorld(self.ldata[2],self.ldata[3],data.Pos,data.Ang)
 					local fr = ent.pixvis:PixelVisible(p,1)
@@ -3446,7 +3563,7 @@ hook.Add("CanProperty","Trolleybus_System.ContactNetworkObjects",function(ply,pr
 end)
 
 hook.Add("CanTool","Trolleybus_System.ContactNetworkObjects",function(ply,tr,toolname,tool,button)
-	if IsValid(tr.Entity) and Trolleybus_System.NetworkSystem.GetNWVar(tr.Entity,"ContactNetworkObject",false) and toolname!="trolleytrafficlighteditor" then
-		return false
+	if IsValid(tr.Entity) and Trolleybus_System.NetworkSystem.GetNWVar(tr.Entity,"ContactNetworkObject",true) and toolname!="trolleytrafficlighteditor" then
+		return true
 	end
 end)
