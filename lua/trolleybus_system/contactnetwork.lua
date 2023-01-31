@@ -3563,7 +3563,7 @@ hook.Add("CanProperty","Trolleybus_System.ContactNetworkObjects",function(ply,pr
 end)
 
 hook.Add("CanTool","Trolleybus_System.ContactNetworkObjects",function(ply,tr,toolname,tool,button)
-	if IsValid(tr.Entity) and Trolleybus_System.NetworkSystem.GetNWVar(tr.Entity,"ContactNetworkObject",true) and toolname!="trolleytrafficlighteditor" then
-		return true
+	if IsValid(tr.Entity) and Trolleybus_System.NetworkSystem.GetNWVar(tr.Entity,"ContactNetworkObject",false) and toolname!="trolleytrafficlighteditor" then
+		return false
 	end
 end)
