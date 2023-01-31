@@ -1,3 +1,6 @@
+# Чем этот форк будет отличаться от основной модификации
+Данная версия будет отличаться незначительными изменениями, нацеленными на удобное использование механизмов контактной сети. 
+
 Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This work is licensed under a
@@ -10,48 +13,50 @@ This work is licensed under a
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
 # Garry's Mod: Trolleybus System
-## Version: Beta 1.0
+## Версия: Beta 1.0
 
-Trolleybus Simulator addon for Garry's Mod.
+Симулятор троллейбуса в Garry's Mod.
 
-Main features:
-* Well-developed trolleybuses
-* Contact network system
-* Routes system: trolleybus stops and passengers
-* Simple traffic system
-* Map created for trolleybuses
-* Editor tools for creating infrastructure for trolleybuses
+Основные особенности:
+* Проработанные троллейбусы
+* Система контактной сети
+* Система маршрутов: троллейбусные остановки и пассажиры
+* Простая система дорожного движения
+* Созданна карта для троллейбуса
+* Редактор инструментов для создания инфраструктуры для троллейбусов
 
-Mechanics of trolleybuses based on real world. Controls contains many subsystems (engine, circuits, informers, control systems, etc). This will make you feel like a real trolleybus driver.
+Механика троллейбусов основана на реальном мире. Элементы управления содержат множество подсистем (двигатель, схемы, информаторы, системы управления и т.д.). Это позволит вам почувствовать себя настоящим водителем троллейбуса.
 
-List of main trolleybuses:
-* ZiU-682V-013
-* ZiU-6205
-* AKSM-101-PS
-* AKSM-321 (few mods)
-* AKSM-333 (few mods)
-* TrolZa-5265
+Список основных троллейбусов:
+* ЗиУ-682В-013
+* ЗиУ-6205
+* АКСМ-101-ПС
+* АКСМ-321 (несколько модификаций)
+* АКСМ-333 (несколько модификаций)
+* Тролза-5265
 
-Contact network is strongly detailed. It contains main elements like wires, switches, crosses and etc. In trolleybuses and contact network used electric circuits computations to simulate real world events.
+Контактная сеть сильно детализирована. Она содержит основные элементы, такие как провода, переключатели, крестовины и т.д. В троллейбусах и контактной сети используются вычисления электрических цепей для имитации событий реального мира.
 
-Players can use trolleybus route to transport passengers between stops, also using informer system when needed. In addition, addon contains simple traffic systems that consists of AI traffic cars and traffic lights.
+Игроки могут использовать троллейбусный маршрут для перевозки пассажиров между остановками, также при необходимости используя систему информирования. Кроме того, аддон содержит простые системы дорожного движения, состоящие из машин с искусственным интеллектом и светофоров.
 
-For trolleybuses as default map created gm_sumy_reborn. It contains part of Sumy city and already configured to play with trolleybuses, so there is contact network, trolleybus routes, stops, traffic lights, etc.
+Для троллейбусов в качестве карты по умолчанию создана gm_sumy_reborn. Она содержит часть города Сумы и уже настроена для игры с троллейбусами, поэтому здесь есть контактная сеть, троллейбусные маршруты, остановки, светофоры и т.д.
 
-Players can use built-in tools on any map to create trolleybus infrastructure. Provided in-game editors:
-* Contact network editor (for creating contant network on map)
-* Routes editor (for creating trolleybus stops and routes to use with)
-* Traffic tracks editor (for creating data used by AI traffic cars to navigate around map)
-* Traffic lights editor (for creating traffic lights in order to comply with traffic rules by trolleybuses and AI traffic cars)
-* Informers editor (for creating informer sound lines used in trolleybus informers)
+Игроки могут использовать встроенные инструменты на любой карте для создания троллейбусной инфраструктуры. Предоставленные внутриигровые редакторы:
+* Редактор контактной сети (для создания контактной сети на карте)
+* Редактор маршрутов (для создания троллейбусных остановок и маршрутов для использования)
+* Редактор дорожных треков (для создания данных, используемых машинами с искусственным интеллектом для навигации по карте)
+* Редактор светофоров (для создания светофоров в целях соблюдения правил дорожного движения троллейбусами и автомобилями с искусственным интеллектом)
+* Редактор информаторов (для создания звуковых линий информаторов, используемых в троллейбусных информаторах)
 
-Addon's API allows developers create their own trolleybuses and other elements, like custom traffic cars. API contains many functions and systems, classes and objects. This will make development easier.
+API аддона позволяет разработчикам создавать свои собственные троллейбусы и другие элементы, такие как пользовательские транспортные средства. API содержит множество функций и систем, классов и объектов. Это облегчит разработку.
 
-Developers:
-* [Shadow Bonnie (RUS)](https://steamcommunity.com/id/shadowbonnierus) (Igor Platunov. Main coder, initiator of idea about trolleybuses in Garry's Mod)
-* [Ivano](https://steamcommunity.com/profiles/76561198221032424) (Ivan Opilat. Content maker, designer)
-* [Jorek](https://steamcommunity.com/id/overlord__) (Georgy Novikov. Map and content maker)
-* [Mavid](https://steamcommunity.com/profiles/76561198999620249) (David Mutolapov. Content maker, designer, provides information about real world details)
-* [Aleksei2506](https://steamcommunity.com/id/Aleksei2506) (Aleksey Dovgal. Content maker, provides information about real world details)
+Разработчики:
+* [Shadow Bonnie (RUS)](https://steamcommunity.com/id/shadowbonnierus) (Игорь Платунов. Главный скриптер, инициатор идеи о троллейбусах в Garry's Mod)
+* [Ivano](https://steamcommunity.com/profiles/76561198221032424) (Иван Опилат. Создатель контента, моделлер)
+* [Jorek](https://steamcommunity.com/id/overlord__) (Георгий Новиков. Создатель карт и контента)
+* [Mavid](https://steamcommunity.com/profiles/76561198999620249) (Давид Мутолапов. Создатель контента, моделлер, предоставляет информацию о деталях реального мира)
+* [Aleksei2506](https://steamcommunity.com/id/Aleksei2506) (Алексей Довгаль. Создатель контента, предоставляет информацию о деталях реального мира)
+Активные тестеры:
+* [Trollebas](https://steamcommunity.com/id/trollebas) (Артемий Данилин. Курировал разработку и предлагал идеи по развитию мода. Немалое колличество им предложенных идей реализовано)
 
-Many thanks to the [FS Project](https://fsproject.ru), which helped to gather an audience and accompanied the development.
+Большое спасибо [FS Project](https://fsproject.ru), который помог собрать аудиторию и сопровождал разработку.
