@@ -270,6 +270,8 @@ local WORK_SOUND = {
 			local len = 0
 			
 			for k,v in ipairs(self.StartSnds) do
+				if !v.len then continue end
+
 				if ct>=len and ct<len+v.len then
 					return v,ct-len
 				end
@@ -281,6 +283,8 @@ local WORK_SOUND = {
 				local len = 0
 				
 				for k,v in ipairs(self.EndSnds) do
+					if !v.len then continue end
+
 					if ct>=len and ct<len+v.len then
 						return v,ct-len
 					end
@@ -786,7 +790,7 @@ end)
 function Trolleybus_System.IsButtonsDown(btns,any)
 	if istable(btns) then
 		for i=1,#btns do
-			if !input.IsButtonDown(btns) then
+			if !input.IsButtonDown(btns[i]) then
 				if !any then return false end
 			else
 				if any then return true end
